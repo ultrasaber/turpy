@@ -7,9 +7,17 @@ const client = new Discord.Client();
 
 console.log('[INFO] turpy is now loading.');
 
+// Object for core utilities.
+var turpy = {};
+
 // External script loader. Reads all scripts found in the ./scripts directory and runs them.
+
+// scriptSandbox exposes things to external scripts.
 const scriptSandbox = {
-    client: client // Make the discord client API available to external scripts.
+    turpy: turpy,
+    client: client,
+    util: util,
+    console: console
 };
 const scriptContext = new vm.createContext(scriptSandbox);
 
@@ -37,6 +45,23 @@ fs.readFile('config/token.txt', 'utf8', (error, token) => {
 });
 
 client.on('ready', () => {
-  console.log('[READY] turpy is now ready.');
-  console.log('[INFO] Invite link: https://discordapp.com/oauth2/authorize?client_id=336477550811414539&scope=bot&permissions=0');
+    // Load core functions.
+
+    // Evaluates if a given string follows the proper command syntax.
+    // The proper syntax is "<@[user_id]> [arguments]".
+    // Returns [arguments] if the message is a proper command, returns false if not.
+    turpy.getCommand = function(messageContent) {
+        var formatExpression = new RegExp('^<@' + client.user.id + '> ');
+        var followsFormat = formatExpression.test(messageContent);
+
+        if(followsFormat) {
+            return messageContent.replace(formatExpression, '');
+        }
+        else {
+            return false;
+        }
+    };
+
+    console.log('[READY] turpy is now ready.');
+    console.log('[INFO] Invite link: https://discordapp.com/oauth2/authorize?client_id=336477550811414539&scope=bot&permissions=0');
 });
