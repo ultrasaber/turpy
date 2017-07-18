@@ -56,8 +56,5 @@ client.on('message', message => {
                 }
             }
         }
-        else {
-            message.reply('this command is reserved for administrators only.');
-        }
     }
 });

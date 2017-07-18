@@ -74,7 +74,6 @@ client.on('ready', () => {
     }
 
     console.log('[READY] turpy is now ready.');
-    console.log('[INFO] Invite link: https://discordapp.com/oauth2/authorize?client_id=336477550811414539&scope=bot&permissions=0');
 
     client.guilds.array().forEach((guild) => {
         guild.defaultChannel.send(':white_check_mark: **Hello! Turpy has completed her initialization process.**');
