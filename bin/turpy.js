@@ -9,8 +9,6 @@ var turpy = {};                       // Object for all core utility functions.
 var admins;                           // Array of user IDs of administrators. Defined in config/admins.txt.
 const client = new Discord.Client();
 
-// External script loader. Reads all scripts found in the ./scripts directory and runs them.
-
 // scriptSandbox exposes things to external scripts.
 const scriptSandbox = {
     turpy: turpy,
@@ -20,6 +18,7 @@ const scriptSandbox = {
 };
 const scriptContext = new vm.createContext(scriptSandbox);
 
+// External script loader. Reads all scripts found in the ./scripts directory and runs them.
 fs.readdir('scripts', (error, files) => {
     if (error) throw error;
     
