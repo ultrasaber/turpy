@@ -3,12 +3,11 @@ const fs = require('fs');
 const vm = require('vm');
 const util = require('util');
 
-const client = new Discord.Client();
-
 console.log('[INFO] turpy is now loading.');
 
-// Object for core utilities.
-var turpy = {};
+var turpy = {};                       // Object for all core utility functions.
+var admins;                           // Array of user IDs of administrators. Defined in config/admins.txt.
+const client = new Discord.Client();
 
 // External script loader. Reads all scripts found in the ./scripts directory and runs them.
 
@@ -17,7 +16,7 @@ const scriptSandbox = {
     turpy: turpy,
     client: client,
     util: util,
-    console: console
+    console: console,
 };
 const scriptContext = new vm.createContext(scriptSandbox);
 
@@ -44,6 +43,14 @@ fs.readFile('config/token.txt', 'utf8', (error, token) => {
     client.login(token);
 });
 
+// Read user-defined administrator IDs in config/admins.txt, which is a comma-delimited list.
+fs.readFile('config/admins.txt', 'utf8', (error, adminString) => {
+    if (error) throw error;
+    admins = adminString.split(',');
+    console.log('[INFO] Bot administrators have been processed:');
+    console.log(util.inspect(admins));
+});
+
 client.on('ready', () => {
     // Load core functions.
 
@@ -62,6 +69,15 @@ client.on('ready', () => {
         }
     };
 
+    // Determines if a message is from a valid administrator.
+    turpy.isAdministrator = function(message) {
+        return admins.indexOf(message.author.id) !== -1;
+    }
+
     console.log('[READY] turpy is now ready.');
     console.log('[INFO] Invite link: https://discordapp.com/oauth2/authorize?client_id=336477550811414539&scope=bot&permissions=0');
+
+    client.guilds.array().forEach((guild) => {
+        guild.defaultChannel.send(':white_check_mark: **Hello! Turpy has completed her initialization process.**');
+    });
 });
