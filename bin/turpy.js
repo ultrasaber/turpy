@@ -15,6 +15,7 @@ const scriptSandbox = {
     client: client,
     util: util,
     console: console,
+    require: require
 };
 const scriptContext = new vm.createContext(scriptSandbox);
 
