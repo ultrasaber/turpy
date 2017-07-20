@@ -19,7 +19,7 @@ const scriptSandbox = {
 };
 const scriptContext = new vm.createContext(scriptSandbox);
 
-// External script loader. Reads all scripts found in the ./scripts directory and runs them.
+// External script loader. Reads all scripts found in the ./scripts directory and runs them under the above sandbox.
 fs.readdir('scripts', (error, files) => {
     if (error) throw error;
     
@@ -40,13 +40,13 @@ fs.readdir('scripts', (error, files) => {
 // Read auth token from config file and login as the bot user
 fs.readFile('config/token.txt', 'utf8', (error, token) => {
     if (error) throw error;
-    client.login(token);
+    client.login(token.trim());
 });
 
 // Read user-defined administrator IDs in config/admins.txt, which is a comma-delimited list.
 fs.readFile('config/admins.txt', 'utf8', (error, adminString) => {
     if (error) throw error;
-    admins = adminString.split(',');
+    admins = adminString.trim().split(',');
     console.log('[INFO] Bot administrators have been processed:');
     console.log(util.inspect(admins));
 });
