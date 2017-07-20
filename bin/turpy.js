@@ -3,11 +3,17 @@ const fs = require('fs');
 const vm = require('vm');
 const util = require('util');
 
-console.log('[INFO] turpy is now loading.');
-
 var turpy = {};                       // Object for all core utility functions.
 var admins;                           // Array of user IDs of administrators. Defined in config/admins.txt.
 const client = new Discord.Client();
+
+// Literally just a wrapper for console.log, but with timestamps.
+turpy.log = function(string) {
+    var timestamp = new Date();
+    console.log("[" + timestamp.toUTCString() + "] " + string);
+}
+
+turpy.log('[INFO] turpy is now loading.');
 
 // scriptSandbox exposes things to external scripts.
 const scriptSandbox = {
@@ -29,7 +35,7 @@ fs.readdir('scripts', (error, files) => {
         fs.readFile(scriptPath, 'utf8', (error, script) => {
             if (error) throw error;
 
-            console.log('[SCRIPT] Read ' + scriptPath + '.');
+            turpy.log('[SCRIPT] Read ' + scriptPath + '.');
             
             var vmScript = new vm.Script(script);
             vmScript.runInContext(scriptContext);
@@ -47,8 +53,8 @@ fs.readFile('config/token.txt', 'utf8', (error, token) => {
 fs.readFile('config/admins.txt', 'utf8', (error, adminString) => {
     if (error) throw error;
     admins = adminString.trim().split(',');
-    console.log('[INFO] Bot administrators have been processed:');
-    console.log(util.inspect(admins));
+    turpy.log('[INFO] Bot administrators have been processed:');
+    turpy.log(util.inspect(admins));
 });
 
 client.on('ready', () => {
@@ -74,9 +80,10 @@ client.on('ready', () => {
         return admins.indexOf(message.author.id) !== -1;
     }
 
-    console.log('[READY] turpy is now ready.');
+    turpy.log('[READY] turpy is now ready.');
 
     client.guilds.array().forEach((guild) => {
         guild.defaultChannel.send(':white_check_mark: **Hello! Turpy has completed her initialization process.**');
     });
 });
+
