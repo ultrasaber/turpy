@@ -82,8 +82,8 @@ client.on('ready', () => {
 
     turpy.log('[READY] turpy is now ready.');
 
-    client.guilds.array().forEach((guild) => {
-        guild.defaultChannel.send(':white_check_mark: **Hello! Turpy has completed her initialization process.**');
+    admins.forEach((adminId) => {
+        client.fetchUser(adminId).then(admin => admin.createDM().then(dmChannel => dmChannel.send(":white_check_mark: **Hello! Turpy has completed her initialization process.**")));
     });
 });
 
