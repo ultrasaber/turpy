@@ -5,22 +5,26 @@ it's a discord bot. add cool changes.
 running turpy locally
 ---------------------
 
-1. clone this repository.
+0. **get node.js**
+
+1. **clone this repository.**
 
     `git clone`
 
-2. install dependencies. as of this writing, the only dependency is discord.js. depending on the modules in use, you may have to install other packages.
+2. **install dependencies.** as of this writing, the only dependency is discord.js. depending on the modules in use, you may have to install other packages.
     
     `npm install --save discord.js`
 
-3. create your config files from the repository root:
+3. **create your config files from the repository root:**
 
     - this file must contain your discord auth token. `touch config/token.txt`
     - this file must contain a comma-separated list of discord user ids: `touch config/admins.txt`
     
-4. run turpy from the repository root:
+4. **run turpy from the repository root:**
 
     `node bin/turpy.js`
+    
+5. **check stdout, if turpy is ready, she'll say so.**
     
 writing turpy modules
 ---------------------
