@@ -1,3 +1,5 @@
+turpy.addHelpText('classpect', 'Determines your classpect.');
+
 client.on('message', message => {
     var command = turpy.getCommand(message.content);
     

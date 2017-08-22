@@ -1,3 +1,5 @@
+turpy.addHelpText('guilds', 'Shows guild information. Requires admin.');
+
 client.on('message', message => {
     var command = turpy.getCommand(message.content);
 

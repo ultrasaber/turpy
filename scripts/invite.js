@@ -1,6 +1,8 @@
 const BOT_PERMISSIONS = 0;
 const ALLOW_PUBLIC_INVITES = false;
 
+turpy.addHelpText('invite', 'Get an invite link for this bot.');
+
 client.on('message', message => {
     var command = turpy.getCommand(message.content);
 
