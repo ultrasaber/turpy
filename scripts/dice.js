@@ -3,7 +3,7 @@ const MAXIMUM_SIDES = 300;
 
 turpy.addHelpText('roll XdY', 'Roll some dice.');
 
-client.on('message', message => {
+turpy.client.on('message', message => {
     var command = turpy.getCommand(message.content);
 
     if (command) {

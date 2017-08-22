@@ -1,17 +1,17 @@
 turpy.addHelpText('guilds', 'Shows guild information. Requires admin.');
 
-client.on('message', message => {
+turpy.client.on('message', message => {
     var command = turpy.getCommand(message.content);
 
     if (command) {
         if (turpy.isAdministrator(message)) {
             if (command === 'guilds') {
-                var joinedGuilds = client.guilds.array().length;
+                var joinedGuilds = turpy.client.guilds.array().length;
                 message.reply('Turpy is currently in ' + joinedGuilds + ' guild(s). Type `@turpy guilds list` for more information.');
             }
 
             if (command === 'guilds list') {
-                var guilds = client.guilds.array();
+                var guilds = turpy.client.guilds.array();
                 var output = '';
 
                 guilds.forEach((guild) => {
@@ -23,7 +23,7 @@ client.on('message', message => {
 
             if (command.match(/^guilds info (.*)/) !== null) {
                 var id = command.match(/^guilds info (.*)/)[1];
-                var guild = client.guilds.get(id);
+                var guild = turpy.client.guilds.get(id);
 
                 var joinedDate = new Date();
                 joinedDate.setTime(guild.joinedTimestamp);
@@ -47,7 +47,7 @@ client.on('message', message => {
 
             if (command.match(/^guilds leave (.*)/) !== null) {
                 var id = command.match(/^guilds leave (.*)/)[1];
-                var guild = client.guilds.get(id);
+                var guild = turpy.client.guilds.get(id);
 
                 if (guild !== undefined) {
                     message.channel.send(':information_source: **Turpy is now leaving ' + guild.name + '. Goodbye!**')
