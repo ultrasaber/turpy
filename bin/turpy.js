@@ -3,9 +3,11 @@ const fs = require('fs');
 const vm = require('vm');
 const util = require('util');
 
-var turpy = {};                       // Object for all core utility functions.
 var admins;                           // Array of user IDs of administrators. Defined in config/admins.txt.
 const client = new Discord.Client();
+
+// Load core functions.
+var turpy = {};                       // Object for all core utility functions.
 
 // Literally just a wrapper for console.log, but with timestamps.
 turpy.log = function(string) {
@@ -13,7 +15,35 @@ turpy.log = function(string) {
     console.log("[" + timestamp.toUTCString() + "] " + string);
 }
 
+// Evaluates if a given string follows the proper command syntax.
+// The proper syntax is "<@[user_id]> [arguments]".
+// Returns [arguments] if the message is a proper command, returns false if not.
+turpy.getCommand = function(messageContent) {
+    var formatExpression = new RegExp('^<@' + client.user.id + '> ');
+    var followsFormat = formatExpression.test(messageContent);
+
+    if(followsFormat) {
+        return messageContent.replace(formatExpression, '');
+    }
+    else {
+        return false;
+    }
+};
+
+// Determines if a message is from a valid administrator.
+turpy.isAdministrator = function(message) {
+    return admins.indexOf(message.author.id) !== -1;
+}
+
+// Command help functionality.
+turpy.helpText = "";
+
+turpy.addHelpText = function (commandName, description) {
+    turpy.helpText += "\n" + commandName + " - " + description;
+}
+
 turpy.log('[INFO] turpy is now loading.');
+turpy.addHelpText("help", "Get help for this bot's loaded scripts.");
 
 // scriptSandbox exposes things to external scripts.
 const scriptSandbox = {
@@ -58,28 +88,6 @@ fs.readFile('config/admins.txt', 'utf8', (error, adminString) => {
 });
 
 client.on('ready', () => {
-    // Load core functions.
-
-    // Evaluates if a given string follows the proper command syntax.
-    // The proper syntax is "<@[user_id]> [arguments]".
-    // Returns [arguments] if the message is a proper command, returns false if not.
-    turpy.getCommand = function(messageContent) {
-        var formatExpression = new RegExp('^<@' + client.user.id + '> ');
-        var followsFormat = formatExpression.test(messageContent);
-
-        if(followsFormat) {
-            return messageContent.replace(formatExpression, '');
-        }
-        else {
-            return false;
-        }
-    };
-
-    // Determines if a message is from a valid administrator.
-    turpy.isAdministrator = function(message) {
-        return admins.indexOf(message.author.id) !== -1;
-    }
-
     turpy.log('[READY] turpy is now ready.');
 
     admins.forEach((adminId) => {
@@ -87,3 +95,11 @@ client.on('ready', () => {
     });
 });
 
+// Help command.
+client.on('message', message => {
+    var command = turpy.getCommand(message.content);
+
+    if (command === 'help') {
+        message.reply('```' + turpy.helpText + '```');
+    }
+});
