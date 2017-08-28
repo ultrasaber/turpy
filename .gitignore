@@ -47,5 +47,5 @@ jspm_packages
 .yarn-integrity
 
 # Turpy configs
-config/token.txt
-config/admins.txt
+config/*
+data/*
