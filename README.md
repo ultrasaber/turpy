@@ -13,8 +13,8 @@ running turpy locally
 
 2. **install dependencies.** you will need to install the following packages to run a barebones instance of turpy. depending on the modules in use, you may have to install other packages.
     
-    `npm install --save discord.js`
-    `npm install --save fs-extra`
+    - `npm install --save discord.js`
+    - `npm install --save fs-extra`
 
 3. **create your config files from the repository root:**
 
