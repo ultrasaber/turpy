@@ -65,3 +65,14 @@ module.exports.writeJSONData = function (dir, file, object, callback) {
         });
     });
 }
+
+// Abstractions for reading/writing JSON data.
+module.exports.readGlobalData = function () {}
+module.exports.readGuildData = function () {}
+module.exports.readUserData = function () {}
+module.exports.readGuildUserData = function () {}
+
+module.exports.writeGlobalData = function () {}
+module.exports.writeGuildData = function () {}
+module.exports.writeUserData = function () {}
+module.exports.writeGuildUserData = function () {}
