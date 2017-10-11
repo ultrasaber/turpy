@@ -1,4 +1,4 @@
-var testObject = {
+/*var testObject = {
     foo: "bar",
     bar: "foo"
 }
@@ -9,4 +9,4 @@ turpy.writeJSONData('data/global', 'json-test', testObject, () => {
     turpy.readJSONData('data/global', 'json-test', (readObject) => {
         turpy.log(util.inspect(readObject));
     });
-});
+});*/

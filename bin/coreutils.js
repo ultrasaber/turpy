@@ -67,12 +67,34 @@ module.exports.writeJSONData = function (dir, file, object, callback) {
 }
 
 // Abstractions for reading/writing JSON data.
-module.exports.readGlobalData = function () {}
-module.exports.readGuildData = function () {}
-module.exports.readUserData = function () {}
-module.exports.readGuildUserData = function () {}
+module.exports.readGlobalData = function (key, callback) {
+    module.exports.readJSONData('data/global', key, callback);
+}
 
-module.exports.writeGlobalData = function () {}
-module.exports.writeGuildData = function () {}
-module.exports.writeUserData = function () {}
-module.exports.writeGuildUserData = function () {}
+module.exports.readGuildData = function (guildId, key, callback) {
+    module.exports.readJSONData('data/guild/' + guildId, key, callback);
+}
+
+module.exports.readUserData = function (userId, key, callback) {
+    module.exports.readJSONData('data/user/' + userId, key, callback);
+}
+
+module.exports.readGuildUserData = function (guildId, userId, key, callback) {
+    module.exports.readJSONData('data/guild/' + guildId + "/user/" + userId, key, callback);
+}
+
+module.exports.writeGlobalData = function () {
+
+}
+
+module.exports.writeGuildData = function () {
+
+}
+
+module.exports.writeUserData = function () {
+
+}
+
+module.exports.writeGuildUserData = function () {
+    
+}

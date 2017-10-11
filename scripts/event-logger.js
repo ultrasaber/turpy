@@ -1,4 +1,4 @@
-const LOG_EVENTS = true;
+const LOG_EVENTS = false;
 
 var events = [
     //"channelCreate",
