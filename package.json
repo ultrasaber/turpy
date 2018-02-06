@@ -1,0 +1,27 @@
+{
+  "name": "turpy",
+  "version": "1.0.0",
+  "description": "it's another discord bot.",
+  "main": "./bin/turpy.js",
+  "dependencies": {
+    "discord.js": "^11.2.1",
+    "fs-extra": "^4.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo 'what are tests'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ultrasaber/turpy.git"
+  },
+  "keywords": [
+    "turpy"
+  ],
+  "author": "ultrasaber",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/ultrasaber/turpy/issues"
+  },
+  "homepage": "https://github.com/ultrasaber/turpy#readme"
+}
