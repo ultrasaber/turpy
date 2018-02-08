@@ -24,19 +24,19 @@ describe("coreutils.js", function() {
   });
 
   describe("module.exports.addHelpText", function() {
-    it("identifies admins", function() {
+    it("adds help text", function() {
       expect(1).to.equal(0);
     });
   });
 
   describe("module.exports.readJSONData", function() {
-    it("identifies admins", function() {
+    it("reads JSON files", function() {
       expect(1).to.equal(0);
     });
   });
 
   describe("module.exports.writeJSONData", function() {
-    it("identifies admins", function() {
+    it("writes JSON files", function() {
       expect(1).to.equal(0);
     });
   });

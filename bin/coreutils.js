@@ -83,18 +83,18 @@ module.exports.readGuildUserData = function (guildId, userId, key, callback) {
     module.exports.readJSONData('data/guild/' + guildId + "/user/" + userId, key, callback);
 }
 
-module.exports.writeGlobalData = function () {
-
+module.exports.writeGlobalData = function (key, object, callback) {
+    module.exports.writeJSONData('data/global', key, object, callback);
 }
 
-module.exports.writeGuildData = function () {
-
+module.exports.writeGuildData = function (guildId, key, object, callback) {
+    module.exports.writeJSONData('data/guild/' + guildId, key, object, callback);
 }
 
-module.exports.writeUserData = function () {
-
+module.exports.writeUserData = function (userId, key, object, callback) {
+    module.exports.writeJSONData('data/user/' + userId, key, object, callback);
 }
 
-module.exports.writeGuildUserData = function () {
-    
+module.exports.writeGuildUserData = function (guildId, userId, key, object, callback) {
+    module.exports.writeJSONData('data/guild/' + guildId + "/user/" + userId, key, object, callback);
 }
