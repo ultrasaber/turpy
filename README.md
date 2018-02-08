@@ -1,4 +1,5 @@
 # turpy
+[![Build Status](https://travis-ci.org/ultrasaber/turpy.svg?branch=master)](https://travis-ci.org/ultrasaber/turpy)
 
 it's a discord bot. add cool changes.
 
